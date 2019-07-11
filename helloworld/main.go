@@ -8,7 +8,6 @@ import (
 	"github.com/go-gl/gl/v3.3-core/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
 	"kiwanoengine.com/kiwano"
-	"kiwanoengine.com/kiwano/core"
 	"kiwanoengine.com/kiwano/render"
 )
 
@@ -85,16 +84,15 @@ func (s *MainScene) OnEnter() {
 }
 
 func (s *MainScene) OnUpdate(dt time.Duration) {
-	if kiwano.Window.GLFWWindow.GetKey(glfw.KeyEscape) == glfw.Press {
-		kiwano.Window.GLFWWindow.SetShouldClose(true)
+	if kiwano.MainWindow.GLFWWindow.GetKey(glfw.KeyEscape) == glfw.Press {
+		kiwano.MainWindow.GLFWWindow.SetShouldClose(true)
 	}
 
 	timeValue := glfw.GetTime()
 	greenValue := (math.Sin(timeValue) / 2.0) + 0.5
-	vertexColorLocation := gl.GetUniformLocation(s.shader.ID, gl.Str("ourColor\x00"))
 
 	s.shader.Use()
-	gl.Uniform4f(vertexColorLocation, 0.0, float32(greenValue), 0.0, 1.0)
+	s.shader.SetFloat4("ourColor\x00", 0.0, float32(greenValue), 0.0, 1.0)
 
 	//gl.DrawArrays(gl.TRIANGLES, 0, 3)
 	gl.DrawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
@@ -107,11 +105,11 @@ func (s *MainScene) OnExit() {
 
 func main() {
 	// Init kiwano engine
-	if err := kiwano.Init(&core.Option{
+	if err := kiwano.Init(&kiwano.Option{
 		Width:      640,
 		Height:     480,
 		Title:      "LearnOpenGL",
-		ClearColor: core.ColorRGB(0.2, 0.3, 0.3),
+		ClearColor: kiwano.ColorRGB(0.2, 0.3, 0.3),
 		NoTitleBar: false,
 		Resizable:  true,
 		Fullscreen: false,
