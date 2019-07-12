@@ -44,7 +44,7 @@ var vertices = []float32{
 }
 
 var indices = []uint32{ // 注意索引从0开始!
-	0, 1, 3, // 第一个三角形
+	0, 1, 3, // 第一个三角形.0
 	1, 2, 3, // 第二个三角形
 }
 
@@ -101,6 +101,7 @@ func (s *MainScene) OnUpdate(dt time.Duration) {
 func (s *MainScene) OnExit() {
 	gl.DeleteVertexArrays(1, &s.VAO)
 	gl.DeleteBuffers(1, &s.VBO)
+	gl.DeleteBuffers(1, &s.EBO)
 }
 
 func main() {
