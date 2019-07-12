@@ -5,6 +5,9 @@ import (
 	"go/build"
 	"image"
 	"image/draw"
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
 	"log"
 	"os"
 	"time"
@@ -122,7 +125,7 @@ func (s *MainScene) OnEnter() {
 	gl.EnableVertexAttribArray(2)
 
 	// Load the texture
-	s.textureID, err = newTexture("assets/container.jpg")
+	s.textureID, err = newTexture("assets/wall.jpg")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -193,10 +196,11 @@ func newTexture(file string) (uint32, error) {
 
 func main() {
 	if err := kiwano.Init(&kiwano.Option{
-		Title:  "LearnTexture",
-		Width:  640,
-		Height: 480,
-		Vsync:  true,
+		Title:     "LearnTexture",
+		Width:     640,
+		Height:    480,
+		Vsync:     true,
+		Resizable: true,
 	}); err != nil {
 		log.Fatalln(err)
 	}
