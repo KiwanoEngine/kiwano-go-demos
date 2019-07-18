@@ -12,9 +12,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-gl/gl/v3.3-core/gl"
-
 	"kiwanoengine.com/kiwano"
+	"kiwanoengine.com/kiwano/external/gl"
 	"kiwanoengine.com/kiwano/render"
 )
 
@@ -194,18 +193,19 @@ func newTexture(file string) (uint32, error) {
 	return texture, nil
 }
 
+func setup() {
+	kiwano.EnterScene(&MainScene{})
+}
+
 func main() {
-	if err := kiwano.Init(&kiwano.Option{
+	option := &kiwano.Option{
 		Title:     "LearnTexture",
 		Width:     640,
 		Height:    480,
 		Vsync:     true,
 		Resizable: true,
-	}); err != nil {
+	}
+	if err := kiwano.Setup(option, setup); err != nil {
 		log.Fatalln(err)
 	}
-	defer kiwano.Destroy()
-
-	kiwano.EnterScene(&MainScene{})
-	kiwano.Run()
 }

@@ -5,9 +5,10 @@ import (
 	"math"
 	"time"
 
-	"github.com/go-gl/gl/v3.3-core/gl"
-	"github.com/go-gl/glfw/v3.2/glfw"
+	"kiwanoengine.com/kiwano/input"
+
 	"kiwanoengine.com/kiwano"
+	"kiwanoengine.com/kiwano/external/gl"
 	"kiwanoengine.com/kiwano/render"
 )
 
@@ -84,11 +85,11 @@ func (s *MainScene) OnEnter() {
 }
 
 func (s *MainScene) OnUpdate(dt time.Duration) {
-	if kiwano.MainWindow.GLFWWindow.GetKey(glfw.KeyEscape) == glfw.Press {
-		kiwano.MainWindow.GLFWWindow.SetShouldClose(true)
+	if input.Pressed(input.Escape) {
+		kiwano.Exit()
 	}
 
-	timeValue := glfw.GetTime()
+	timeValue := (float64)(time.Now().Unix())
 	greenValue := (math.Sin(timeValue) / 2.0) + 0.5
 
 	s.shader.Use()
@@ -104,9 +105,13 @@ func (s *MainScene) OnExit() {
 	gl.DeleteBuffers(1, &s.EBO)
 }
 
+func setup() {
+	// Enter scene
+	kiwano.EnterScene(&MainScene{})
+}
+
 func main() {
-	// Init kiwano engine
-	if err := kiwano.Init(&kiwano.Option{
+	option := &kiwano.Option{
 		Width:      640,
 		Height:     480,
 		Title:      "LearnOpenGL",
@@ -115,14 +120,10 @@ func main() {
 		Resizable:  true,
 		Fullscreen: false,
 		Vsync:      true,
-	}); err != nil {
+	}
+
+	// Setup kiwano engine
+	if err := kiwano.Setup(option, setup); err != nil {
 		log.Fatalln(err)
 	}
-	defer kiwano.Destroy()
-
-	// Enter scene
-	kiwano.EnterScene(&MainScene{})
-
-	// Start game
-	kiwano.Run()
 }
