@@ -1,0 +1,6 @@
+github.com/go-gl/gl v0.0.0-20210315015930-ae072cafe09d h1:o81yRlBATU4PRn97lydmsq8hTRNXI4wlR/VvUQhFRVY=
+github.com/go-gl/gl v0.0.0-20210315015930-ae072cafe09d/go.mod h1:482civXOzJJCPzJ4ZOX/pwvXBWSnzD4OKMdH4ClKGbk=
+github.com/go-gl/glfw v0.0.0-20210311203641-62640a716d48 h1:2Ql7UigDMdlF+Ii12kdox7RKw3J1+uGhXn9FyYbbd20=
+github.com/go-gl/glfw v0.0.0-20210311203641-62640a716d48/go.mod h1:vR7hzQXu2zJy9AVAgeJqvqgH9Q5CA+iKCZ2gyEVpxRU=
+kiwanoengine.com/kiwano v0.0.0-20190718070127-133e300949ef h1:XeAI2ishLEbIA8z9++UbVrqZZsw9CNi7wFCYeLYtPAQ=
+kiwanoengine.com/kiwano v0.0.0-20190718070127-133e300949ef/go.mod h1:TVSCBZbAxkK06p9eO5jXa4XI5rUpWga5MtaNZY47nos=
